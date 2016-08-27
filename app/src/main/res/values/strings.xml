@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Coursera</string>
+    <string name="search_hint">Search courses/specializations by keywords.</string>
+
+    <!-- The menu entry that invokes search. -->
+    <string name="menu_search">Search</string>
+
+    <!-- Shown above search results when we receive a search request. -->
+    <plurals name="search_results">
+        <item quantity="one">%1$d result for \"%2$s\": </item>
+        <item quantity="other">%1$d results for \"%2$s\": </item>
+    </plurals>
+
+    <!-- Search failure message. -->
+    <string name="no_results">No results found for \"%s\"</string>
+
+    <plurals name="format_num_courses">
+        <item quantity="one">%d course</item>
+        <item quantity="other">%d courses</item>
+    </plurals>
+
+    <string name="action_settings">Settings</string>
+
+</resources>
