@@ -26,9 +26,6 @@ import static com.github.denisura.coursera.R.id.entity_image;
 import static com.github.denisura.coursera.R.id.numCourses;
 import static com.github.denisura.coursera.R.id.partners_list;
 
-/**
- * @author e.matsyuk
- */
 public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int UNKNOWN_VIEW = -1;
@@ -176,6 +173,5 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         .getResources()
                         .getQuantityString(R.plurals.format_num_courses, numCourses, numCourses)
         );
-
     }
 }

@@ -5,12 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Entry {
 
-    @SerializedName("score")
-    @Expose
-    public Float score;
-    @SerializedName("resourceName")
-    @Expose
-    public String resourceName;
     @SerializedName("id")
     @Expose
     public String id;

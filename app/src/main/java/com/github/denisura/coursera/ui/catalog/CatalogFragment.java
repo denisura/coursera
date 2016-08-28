@@ -26,9 +26,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
 
-public class CatalogFragment extends BaseFragment implements CatalogView {
-
-    private CatalogPresenter presenter;
+public class CatalogFragment extends BaseFragment{
 
     // the fragment initialization parameters
     private static final String ARG_QUERY = "query";
@@ -41,7 +39,6 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
     private CatalogAdapter recyclerViewAdapter;
     private Subscription pagingSubscription;
     private CourseraApi _courseraService;
-//    private CompositeSubscription _subscriptions;
 
     private String mQuery = "";
 
@@ -69,10 +66,6 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
         if (getArguments() != null) {
             mQuery = getArguments().getString(ARG_QUERY);
         }
-
-        Timber.d("Query %s", mQuery);
-        presenter = new CatalogPresenterImpl(this, new FindItemsInteractorImpl(mQuery));
-
     }
 
     @Override
@@ -108,7 +101,6 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
         }
 
         _courseraService = CourseraService.createCourseraService();
-//        _subscriptions = new CompositeSubscription();
 
         // RecyclerView pagination
         PaginationTool<Catalog> paginationTool =
@@ -144,14 +136,7 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        presenter.onResume();
-    }
-
-    @Override
     public void onDestroy() {
-        presenter.onDestroy();
         unbinder.unbind();
         super.onDestroy();
     }
@@ -166,29 +151,5 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
         }
         recyclerViewAdapter.setContext(null);
         super.onDestroyView();
-    }
-
-    @Override
-    public void showProgress() {
-//        progressBar.setVisibility(View.VISIBLE);
-//        listView.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-//        progressBar.setVisibility(View.INVISIBLE);
-//        listView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void setItems(List<String> items) {
-        // listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items));
-
-    }
-
-    @Override
-    public void showMessage(String message) {
-        //  Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-
     }
 }

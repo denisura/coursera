@@ -8,18 +8,12 @@ import java.util.List;
 
 public class CoursesV1 {
 
-    @SerializedName("courseType")
-    @Expose
-    public String courseType;
     @SerializedName("photoUrl")
     @Expose
     public String photoUrl;
     @SerializedName("id")
     @Expose
     public String id;
-    @SerializedName("slug")
-    @Expose
-    public String slug;
     @SerializedName("partnerIds")
     @Expose
     public List<Integer> partnerIds = new ArrayList<Integer>();

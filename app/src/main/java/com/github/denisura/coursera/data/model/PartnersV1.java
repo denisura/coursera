@@ -11,8 +11,4 @@ public class PartnersV1 {
     @SerializedName("id")
     @Expose
     public Integer id;
-    @SerializedName("shortName")
-    @Expose
-    public String shortName;
-
 }

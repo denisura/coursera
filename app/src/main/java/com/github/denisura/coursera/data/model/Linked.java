@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import timber.log.Timber;
-
 public class Linked {
 
     @SerializedName("courses.v1")
@@ -42,11 +40,9 @@ public class Linked {
 
     private void setCourseMap() {
         if (mCoursesMap == null) {
-            Timber.d("setCourseMap");
             mCoursesMap = new HashMap();
             for (CoursesV1 course : coursesV1) {
                 for (int parnerId : course.partnerIds) {
-                    Timber.d("getPartnerById: %d", parnerId);
                     course.partnerNames.add(getPartnerById(parnerId).name);
                 }
                 mCoursesMap.put(course.id, course);
@@ -60,9 +56,7 @@ public class Linked {
     }
 
     private void setSpecializationMap() {
-        Timber.d("setSpecializationMap");
         if (mSpecializationMap == null) {
-            Timber.d("setSpecializationMap:init");
             mSpecializationMap = new HashMap();
             for (OnDemandSpecializationsV1 specialization : onDemandSpecializationsV1) {
                 for (int parnerId : specialization.partnerIds) {
@@ -70,14 +64,12 @@ public class Linked {
                         specialization.partnerNames.add(getPartnerById(parnerId).name);
                     }
                 }
-                Timber.d("setSpecializationMap:init:put %s", specialization.id);
                 mSpecializationMap.put(specialization.id, specialization);
             }
         }
     }
 
     public OnDemandSpecializationsV1 getSpecializationById(String id) {
-        Timber.d("getSpecializationById %s", id);
         setSpecializationMap();
         return mSpecializationMap.get(id);
     }

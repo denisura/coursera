@@ -13,9 +13,6 @@ public class Catalog {
     @SerializedName("elements")
     @Expose
     public List<Element> elements = new ArrayList<>();
-    @SerializedName("paging")
-    @Expose
-    public Paging paging;
     @SerializedName("linked")
     @Expose
     public Linked linked;
