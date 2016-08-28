@@ -17,6 +17,8 @@ import timber.log.Timber;
 
 public class CatalogActivity extends SingleFragmentActivity {
 
+    static final String STATE_QUERY = "query";
+
     String mQuery = "";
 
     @Override
@@ -31,6 +33,10 @@ public class CatalogActivity extends SingleFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Timber.d("onCreate");
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            mQuery = savedInstanceState.getString(STATE_QUERY);
+        }
         super.onCreate(savedInstanceState);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (!mQuery.equals("")) {
@@ -53,5 +59,11 @@ public class CatalogActivity extends SingleFragmentActivity {
                 searchManager.getSearchableInfo(getComponentName()));
 
         return true;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString(STATE_QUERY, mQuery);
+        super.onSaveInstanceState(savedInstanceState);
     }
 }
