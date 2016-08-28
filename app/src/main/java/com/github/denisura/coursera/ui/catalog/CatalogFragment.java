@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.github.denisura.coursera.R;
 import com.github.denisura.coursera.data.model.Catalog;
@@ -90,13 +89,14 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
 
 
     private void init(Bundle savedInstanceState) {
-        GridLayoutManager recyclerViewLayoutManager = new GridLayoutManager(getActivity(), 1);
+        GridLayoutManager recyclerViewLayoutManager = new GridLayoutManager(getContext().getApplicationContext(), 1);
         recyclerViewLayoutManager.supportsPredictiveItemAnimations();
         // init adapter for the first time
         if (savedInstanceState == null) {
-            recyclerViewAdapter = new CatalogAdapter(getContext());
+            recyclerViewAdapter = new CatalogAdapter();
             recyclerViewAdapter.setHasStableIds(true);
         }
+        recyclerViewAdapter.setContext(getContext().getApplicationContext());
         mRecyclerView.setSaveEnabled(true);
 
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
@@ -109,7 +109,6 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
 
         _courseraService = CourseraService.createCourseraService();
 //        _subscriptions = new CompositeSubscription();
-
 
         // RecyclerView pagination
         PaginationTool<Catalog> paginationTool =
@@ -132,11 +131,9 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
 
                     @Override
                     public void onNext(Catalog catalog) {
-                        Timber.d("fetched entries %d", catalog.elements.get(0).entries.size());
                         int index = recyclerViewAdapter.getItemCount();
                         List<Item> items = new ArrayList<>();
                         for (Object entity : catalog.getEntities()) {
-                            Timber.d("Add item id %d ", index);
                             items.add(new Item(index, entity));
                             index++;
                         }
@@ -155,6 +152,7 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
     @Override
     public void onDestroy() {
         presenter.onDestroy();
+        unbinder.unbind();
         super.onDestroy();
     }
 
@@ -163,7 +161,10 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
         if (pagingSubscription != null && !pagingSubscription.isUnsubscribed()) {
             pagingSubscription.unsubscribe();
         }
-        unbinder.unbind();
+        if (mRecyclerView != null) {
+            mRecyclerView.setAdapter(null);
+        }
+        recyclerViewAdapter.setContext(null);
         super.onDestroyView();
     }
 
@@ -187,7 +188,7 @@ public class CatalogFragment extends BaseFragment implements CatalogView {
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        //  Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
 
     }
 }

@@ -17,14 +17,15 @@ import timber.log.Timber;
 
 public class CatalogActivity extends SingleFragmentActivity {
 
+    String mQuery = "";
+
     @Override
     protected Fragment createFragment() {
-        String query = "";
         if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-            query = getIntent().getStringExtra(SearchManager.QUERY);
-            Timber.d("Query %s", query);
+            mQuery = getIntent().getStringExtra(SearchManager.QUERY);
+            Timber.d("Query %s", mQuery);
         }
-        return CatalogFragment.newInstance(query);
+        return CatalogFragment.newInstance(mQuery);
     }
 
     @Override
@@ -32,6 +33,9 @@ public class CatalogActivity extends SingleFragmentActivity {
         Timber.d("onCreate");
         super.onCreate(savedInstanceState);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (!mQuery.equals("")) {
+            toolbar.setTitle(mQuery);
+        }
         setSupportActionBar(toolbar);
     }
 

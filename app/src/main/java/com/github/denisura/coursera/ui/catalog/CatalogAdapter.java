@@ -39,10 +39,11 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     // after reorientation test this member
     // or one extra request will be sent after each reorientation
     private boolean allItemsLoaded;
+    private Context mContext;
 
-    private final Context mContext;
+    public CatalogAdapter() {}
 
-    public CatalogAdapter(Context context) {
+    public void setContext(Context context) {
         mContext = context;
     }
 

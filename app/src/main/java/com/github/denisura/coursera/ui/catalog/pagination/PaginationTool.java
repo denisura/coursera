@@ -15,6 +15,9 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
+/**
+ * @see //github.com/matzuk/PaginationSample
+ */
 public class PaginationTool<T> {
 
     // for first start of items loading then on RecyclerView there are not items and no scrolling
